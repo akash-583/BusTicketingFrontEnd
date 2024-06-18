@@ -1,0 +1,89 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+
+    <div class="modal-dialog">
+  
+      <div class="modal-content">
+        
+        <div >
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel"><b>Booking Details</b></h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="content">
+            <!-- Use interpolation to display the booking details -->
+            <div class="details">
+              <p>&nbsp;&nbsp;<b>TicketNo : </b>{{ data?.bookingModel?.ticketNo}}</p>
+              <p>&nbsp;&nbsp;<b>User Name:</b> {{ data?.bookingModel?.username }}</p>
+              <p>&nbsp;&nbsp;<b>Bus No: </b>{{ data?.busModel?.busNo }}</p>
+              <p>&nbsp;&nbsp;<b>Drop Time:</b> {{ data?.busModel?.dropTime }}</p>
+              <p>&nbsp;&nbsp;<b>Boarding Time:</b> {{ data?.busModel?.boardingTime }}</p>
+              <p>&nbsp;&nbsp;<b>Source: </b>{{ data?.busModel?.source }}</p>
+              <p>&nbsp;&nbsp;<b>Destination: </b>{{ data?.busModel?.destination }}</p>
+              <p>&nbsp;&nbsp;<b>No Of Tickets: </b>{{ data?.bookingModel?.numberOfTickets }}</p>
+              <p>&nbsp;&nbsp;<b>Total Cost: </b>{{ data?.bookingModel?.cost }}</p>
+              <p>&nbsp;&nbsp;<b>Phone Number: </b>{{ data?.bookingModel?.phnnumber }}</p>
+              <p>&nbsp;&nbsp;<b>Email:</b>{{ data?.bookingModel?.email }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+     
+       <p> &nbsp;&nbsp;&nbsp;&nbsp;<button class="btn btn-primary" (click)="printDiv('content')">Print Now</button></p>
+      </div>
+      </div>
+  
+    </div>
+  
+  </div>
+  
+  
+  
+  
+  
+  <!-- ******************************************************************************************************************** -->
+  <link rel="stylesheet" type="text/css" href="bookinglist.component.css" media="print">
+  
+  
+  
+  
+  <app-navbar></app-navbar>
+  
+ 
+  <br>
+  <div class="main">
+    <div class="d-flex">
+      <button class="btn btn-secondary" *ngIf="isRole === 'Admin'" (click)="printPage('content1')"> Click here to download the
+        list</button>
+    </div>
+    <div class=" border-dark mb-3" id="content1">
+      <h1 class="card-header border-dark text-center">Booking List</h1>
+      <br>
+      <div class="row1 main1" >
+        <div *ngFor="let row of dataSource" class="col-md-4 card card-row"  style="margin-right: 2px;
+        margin-bottom: 10px;margin-left:20px;width: 575px;">
+          <div class="card-header">
+            <b class="d-flex">Ticket No: {{ row.ticketNo}}</b>
+          </div>
+          <div class="card-body" align="left">
+            <!-- <p><b>Username:</b> {{ row.username }}</p>   <p><b>TrainNo:</b>{{ row.trainNo }}</p>
+            <p> </p>
+           
+            </p>
+            <p><b>Cost:</b>{{ row.cost }}</p> -->
+            <p><b>Username:</b> {{ row.username}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>BusNo:</b>{{
+              row.busNo }}</p>
+            <p><b>Phone Number:</b>{{ row.phnnumber
+              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Email:</b>{{ row.email }}</p>
+            <p><b>No of Tickets:</b> {{ row.numberOfTickets
+              }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Cost:</b>{{
+              row.cost }}</p>
+  
+            <p *ngIf="isRole !== 'Admin'"><b>View Ticket:</b><button *ngIf="isRole !== 'Admin'" (click)="details(row.ticketNo)"
+                data-bs-toggle="modal" data-bs-target="#exampleModal"><img src="assets\hand-index.svg"></button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <b>Cancel Ticket:</b><button *ngIf="isRole !== 'Admin'"
+                (click)="cancelTicket(row.ticketNo)"><img src="assets\trash-fill.svg"></button></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

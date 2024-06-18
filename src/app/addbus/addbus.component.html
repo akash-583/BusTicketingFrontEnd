@@ -1,0 +1,95 @@
+
+<app-navbar></app-navbar>
+<!-- <div class="bus">
+    <<h1>bus Information Form</h1> -->
+    <!--<div class="addbus">
+      
+    </div>
+  </div> -->
+  <div class="card custom-card" style="width: 1000px;height:750px;">
+    <h5 class="card-header text-center" >New Bus Form</h5>
+    <div class="card-body">
+        <form [formGroup]="busForm" (ngSubmit)="submitForm()">
+            <!-- bus Number Field -->
+            <div class="mb-3">
+              <label for="busNo" class="form-label"><b>Bus Number</b></label>
+              <input type="text" formControlName="busNo" id="busNo" class="form-control" placeholder="Enter bus Number" />
+              <div *ngIf="busForm.get('busNo')?.invalid && busForm.get('busNo')?.touched" class="error-message">
+                <span *ngIf="busForm.get('busNo')?.hasError('required')">Bus Number is required</span>
+                <span *ngIf="busForm.get('busNo')?.hasError('pattern')">Bus Number should contain exactly 5 digits</span>
+              </div>
+            </div>
+      
+
+      
+            <!-- Source Field -->
+            <div class="mb-3">
+              <label for="source" class="form-label"><b>Source</b></label>
+              <input type="text" formControlName="source" id="source" class="form-control" placeholder="Enter Source" />
+              <div *ngIf="busForm.get('source')?.invalid && busForm.get('source')?.touched" class="error-message">
+                <span *ngIf="busForm.get('source')?.hasError('required')">Source is required</span>
+                <span *ngIf="busForm.get('source')?.hasError('minlength')">Source should be at least 3 characters</span>
+                <span *ngIf="busForm.get('source')?.hasError('maxlength')">Source should not exceed 30 characters</span>
+              </div>
+            </div>
+      
+            <!-- Destination Field -->
+            <div class="mb-3">
+              <label for="destination" class="form-label"><b>Destination</b></label>
+              <input type="text" formControlName="destination" id="destination" class="form-control" placeholder="Enter Destination" />
+              <div *ngIf="busForm.get('destination')?.invalid && busForm.get('destination')?.touched" class="error-message">
+                <span *ngIf="busForm.get('destination')?.hasError('required')">Destination is required</span>
+                <span *ngIf="busForm.get('destination')?.hasError('minlength')">Destination should be at least 3 characters</span>
+                <span *ngIf="busForm.get('destination')?.hasError('maxlength')">Destination should not exceed 30 characters</span>
+              </div>
+            </div>
+      
+            <!-- Fare Field -->
+            <div class="mb-3">
+              <label for="fare" class="form-label"><b>Fare</b></label>
+              <input type="number" formControlName="fare" id="fare" class="form-control" placeholder="Enter Fare" />
+              <div *ngIf="busForm.get('fare')?.invalid && busForm.get('fare')?.touched" class="error-message">
+                <span *ngIf="busForm.get('fare')?.hasError('required')">Fare is required</span>
+                <span *ngIf="busForm.get('fare')?.hasError('min')">Fare should be a positive number</span>
+                <span *ngIf="busForm.get('fare')?.hasError('max')">Fare should not exceed 3000</span>
+              </div>
+            </div>
+      
+            <!-- Seats Field -->
+            <div class="mb-3">
+              <label for="seats" class="form-label"><b>Seats</b></label>
+              <input type="number" formControlName="seats" id="seats" class="form-control" placeholder="Enter Seats" />
+              <div *ngIf="busForm.get('seats')?.invalid && busForm.get('seats')?.touched" class="error-message">
+                <span *ngIf="busForm.get('seats')?.hasError('required')">Seats are required</span>
+                <span *ngIf="busForm.get('seats')?.hasError('min')">Seats should be a positive number</span>
+                <span *ngIf="busForm.get('seats')?.hasError('max')">Seats should not exceed 300</span>
+              </div>
+            </div>
+      
+            <!-- dropTime (HH:mm) Field -->
+            <div class="mb-3">
+              <label for="dropTime" class="form-label"><b>Drop Time (HH:mm)</b></label>
+              <input type="text" formControlName="dropTime" id="dropTime" class="form-control" placeholder="Enter Drop Time (HH:mm)" />
+              <div *ngIf="busForm.get('dropTime')?.invalid && busForm.get('dropTime')?.touched" class="error-message">
+                <span *ngIf="busForm.get('dropTime')?.hasError('required')">DropTime is required</span>
+                <span *ngIf="busForm.get('dropTime')?.hasError('invaliddropTimeFormat')">Invalid Drop Time format (HH:mm)</span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="boardingTime" class="form-label"><b>Boarding Time (HH:mm)</b></label>
+                <input type="text" formControlName="boardingTime" id="boardingTime" class="form-control" placeholder="Enter Boarding Time (HH:mm)" />
+                <div *ngIf="busForm.get('boardingTime')?.invalid && busForm.get('boardingTime')?.touched" class="error-message">
+                  <span *ngIf="busForm.get('boardingTime')?.hasError('required')">BoardingTime is required</span>
+                  <span *ngIf="busForm.get('boardingTime')?.hasError('invalidboardingTimeFormat')">Invalid boarding Time format (HH:mm)</span>
+                </div>
+              </div>
+      
+            <!-- <button type="submit" class="btn btn-success">{{ isEditMode ? 'Update' : 'Submit' }}</button> -->
+            <button type="submit" class="btn btn-success">Submit</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button type="button" class="btn btn-danger" routerLink="/busList">Cancel</button>
+          </form>
+     
+    </div>
+  </div>
+  

@@ -1,0 +1,143 @@
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Update Trains</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+  
+        <div class="modal-body">
+          <form [formGroup]="formValue">
+            <div class="mb-3">
+                <label for="busNo" class="form-label"><b>Bus Number</b></label>
+                <input type="text" formControlName="busNo" id="busNo" class="form-control" placeholder="Enter bus Number" />
+                <div *ngIf="formValue.get('busNo')?.invalid && formValue.get('busNo')?.touched" class="error-message">
+                  <span *ngIf="formValue.get('busNo')?.hasError('required')">Bus Number is required</span>
+                  <span *ngIf="formValue.get('busNo')?.hasError('pattern')">Bus Number should contain exactly 5 digits</span>
+                </div>
+              </div>
+        
+  
+        
+              <!-- Source Field -->
+              <div class="mb-3">
+                <label for="source" class="form-label"><b>Source</b></label>
+                <input type="text" formControlName="source" id="source" class="form-control" placeholder="Enter Source" />
+                <div *ngIf="formValue.get('source')?.invalid && formValue.get('source')?.touched" class="error-message">
+                  <span *ngIf="formValue.get('source')?.hasError('required')">Source is required</span>
+                  <span *ngIf="formValue.get('source')?.hasError('minlength')">Source should be at least 3 characters</span>
+                  <span *ngIf="formValue.get('source')?.hasError('maxlength')">Source should not exceed 30 characters</span>
+                </div>
+              </div>
+        
+              <!-- Destination Field -->
+              <div class="mb-3">
+                <label for="destination" class="form-label"><b>Destination</b></label>
+                <input type="text" formControlName="destination" id="destination" class="form-control" placeholder="Enter Destination" />
+                <div *ngIf="formValue.get('destination')?.invalid && formValue.get('destination')?.touched" class="error-message">
+                  <span *ngIf="formValue.get('destination')?.hasError('required')">Destination is required</span>
+                  <span *ngIf="formValue.get('destination')?.hasError('minlength')">Destination should be at least 3 characters</span>
+                  <span *ngIf="formValue.get('destination')?.hasError('maxlength')">Destination should not exceed 30 characters</span>
+                </div>
+              </div>
+        
+              <!-- Fare Field -->
+              <div class="mb-3">
+                <label for="fare" class="form-label"><b>Fare</b></label>
+                <input type="number" formControlName="fare" id="fare" class="form-control" placeholder="Enter Fare" />
+                <div *ngIf="formValue.get('fare')?.invalid && formValue.get('fare')?.touched" class="error-message">
+                  <span *ngIf="formValue.get('fare')?.hasError('required')">Fare is required</span>
+                  <span *ngIf="formValue.get('fare')?.hasError('min')">Fare should be a positive number</span>
+                  <span *ngIf="formValue.get('fare')?.hasError('max')">Fare should not exceed 3000</span>
+                </div>
+              </div>
+        
+              <!-- Seats Field -->
+              <div class="mb-3">
+                <label for="seats" class="form-label"><b>Seats</b></label>
+                <input type="number" formControlName="seats" id="seats" class="form-control" placeholder="Enter Seats" />
+                <div *ngIf="formValue.get('seats')?.invalid && formValue.get('seats')?.touched" class="error-message">
+                  <span *ngIf="formValue.get('seats')?.hasError('required')">Seats are required</span>
+                  <span *ngIf="formValue.get('seats')?.hasError('min')">Seats should be a positive number</span>
+                  <span *ngIf="formValue.get('seats')?.hasError('max')">Seats should not exceed 300</span>
+                </div>
+              </div>
+        
+              <!-- dropTime (HH:mm) Field -->
+              <div class="mb-3">
+                <label for="dropTime" class="form-label"><b>Drop Time (HH:mm)</b></label>
+                <input type="text" formControlName="dropTime" id="dropTime" class="form-control" placeholder="Enter Drop Time (HH:mm)" />
+                <div *ngIf="formValue.get('dropTime')?.invalid && formValue.get('dropTime')?.touched" class="error-message">
+                  <span *ngIf="formValue.get('dropTime')?.hasError('required')">DropTime is required</span>
+                  <span *ngIf="formValue.get('dropTime')?.hasError('invaliddropTimeFormat')">Invalid Drop Time format (HH:mm)</span>
+                </div>
+              </div>
+  
+              <div class="mb-3">
+                  <label for="boardingTime" class="form-label"><b>Boarding Time (HH:mm)</b></label>
+                  <input type="text" formControlName="boardingTime" id="boardingTime" class="form-control" placeholder="Enter Boarding Time (HH:mm)" />
+                  <div *ngIf="formValue.get('boardingTime')?.invalid && formValue.get('boardingTime')?.touched" class="error-message">
+                    <span *ngIf="formValue.get('boardingTime')?.hasError('required')">BoardingTime is required</span>
+                    <span *ngIf="formValue.get('boardingTime')?.hasError('invalidboardingTimeFormat')">Invalid boarding Time format (HH:mm)</span>
+                  </div>
+                </div>
+  
+          </form>
+  
+        </div>
+  
+        <div class="modal-footer">
+  
+          <button type="button" (click)="updateBus()" routerLink="/trainList" class="btn btn-primary">Save
+            changes</button>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  
+  </div> 
+  
+  
+  
+  <!--------------------------------------------------------------------------------------------------------------------------->
+  <app-navbar></app-navbar>
+  <div class="bg">
+    <br>
+    <br>
+  <h1 class="card-header border-dark text-center">Bus List</h1>
+  <br><br>
+    <div class="container">
+      <div class="row">
+        <div class="col">
+          <div class="form-group">
+            <label for="filter"><b>Filter:</b></label>
+            <input type="text" class="form-control-sm" (keyup)="applyFilter($event)" id="filter" placeholder="Ex. Hyderabad">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button *ngIf="isRole === 'Admin'" class="btn btn-success" routerLink="/addbus">Add Bus</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <hr>
+
+    <br>
+    <div class="row1 main1">
+      <div *ngFor="let row of dataSource" class="col-md-4 card card-row " style="margin-right: 2px;
+      margin-bottom: 7px;margin-left: 2px;width: 400px;">
+        <div class="card-header">
+          <b class="d-flex">Bus No: {{ row.busNo }}</b>
+        </div>
+        <div class="card-body" align="left">
+          <p><b>Source:</b>{{ row.source }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Destination:</b>{{ row.destination }}</p>
+          <p><b>Fare:</b> {{ row.fare }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Seats:</b>{{ row.seats }}</p>
+          <p><b>Drop Time:</b> {{ row.dropTime }}&nbsp;&nbsp;&nbsp;&nbsp;<b>Boarding Time:</b>{{ row.boardingTime }}</p>
+          <p *ngIf="isRole !== 'Admin'"><b>Book Now:</b> <button *ngIf="isRole !== 'Admin'" class="btn btn-success small-button" (click)="redirectToBookingOrLogin(row)">Click here</button>&nbsp;
+            <p *ngIf="isRole === 'Admin'"><b>Edit the train information:</b> <button *ngIf="isRole === 'Admin'" (click)="EditForm(row)" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal"> <img src="assets\pencil-fill.svg"></button>&nbsp;
+            <p *ngIf="isRole === 'Admin'"><b>Delete the train:</b> <button *ngIf="isRole === 'Admin'" (click)="deleteBus(row.busNo)" type="button" > <img src="assets\trash-fill.svg"></button>&nbsp;</p>
+            
+        </div>
+      </div>
+    </div>
+  
