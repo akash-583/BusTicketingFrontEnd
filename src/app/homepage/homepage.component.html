@@ -1,0 +1,135 @@
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content custom">
+       <div class="modal-header">
+         <h1 class="modal-title fs-5 " id="staticBackdropLabel">Bus List</h1>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+       </div>
+       <div class="modal-body">
+         <div class="row1">
+           <div *ngFor="let row of datasource" class="col-md-4 card card-row " style="margin-right: 2px;
+             margin-bottom: 7px;margin-left: 12px;width: 410px;">
+             <div class="card-header">
+               <b class="d-flex">Bus No: {{ row.busNo }}</b>
+             </div>
+             <div class="card-body1"><br>
+               <pre> <b>Source:</b>{{ row.source }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Destination:</b>{{ row.destination }}</pre>
+               <pre> <b>Fare:</b> {{ row.fare }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<b>Seats:</b>{{ row.seats }}</pre>
+               <pre> <b>Drop Time:</b> {{ row.dropTime }}&nbsp;&nbsp;&nbsp;&nbsp;<b>Boarding Time:</b>{{ row.boardingTime }}</pre>
+               <pre
+                 *ngIf="isRole !== 'Admin'"> <b>Book Now:</b> <button *ngIf="isRole !== 'Admin'" class="btn btn-success small-button" (click)="redirectToBookingOrLogin(row)">Click here</button></pre>
+             </div>
+             
+           </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+       </div>
+     </div>
+   </div>
+ </div>
+ 
+ 
+ <!-- ------------------------------------------------------------------------------- -->
+ <app-navbar></app-navbar>
+ <div class="main1">
+ 
+ 
+   <br><br><br><br>
+ 
+   <br>
+   <br>
+ 
+ 
+   <br>
+   <br>
+   <br>
+   <br>
+ 
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <!-- <div class="container">
+         <div class="custom-card">
+           <h5 class="card-header text-center">Register Form</h5>
+     <div class="card-body">
+      
+      
+     </div>
+         </div>
+       </div> -->
+   <div class="card translate-right custom-card" style="width: 400px;height:400px;">
+     <div class="card-body">
+       <h5 class="card-header text-center"><b>Book a Ticket</b></h5>
+       <br>
+       <div class="container">
+         <form [formGroup]="search" (ngSubmit)="searchBuses()">
+           <div class="row">
+             <div class="mb-3">
+               <label for="source" class="form-label"><b>Source</b></label>
+               <input type="text" formControlName="source" id="source" class="form-control" placeholder="Enter Source" />
+ 
+               <div *ngIf="search.get('source')?.invalid && search.get('source')?.touched" class="error-message">
+                 <span *ngIf="search.get('source')?.hasError('required')">Source is required</span>
+                 <span *ngIf="search.get('source')?.hasError('minlength')">Source should be at least 3
+                   characters</span>
+                 <span *ngIf="search.get('source')?.hasError('maxlength')">Source should not exceed 30
+                   characters</span>
+               </div>
+             </div>
+             <br>
+             <br>
+             <br>
+             <br>
+             <div class=" mb-3">
+               <label for="destination" class="form-label"><b>Destination</b></label>
+               <input type="text" formControlName="destination" id="destination" class="form-control"
+                 placeholder="Enter destination" />
+               <div *ngIf="search.get('destination')?.invalid && search.get('destination')?.touched"
+                 class="error-message">
+                 <span *ngIf="search.get('destination')?.hasError('required')">Destination is required</span>
+                 <span *ngIf="search.get('destination')?.hasError('minlength')">Destination should be at least 3
+                   characters</span>
+                 <span *ngIf="search.get('destination')?.hasError('maxlength')">Destination should not exceed 30
+                   characters</span>
+               </div>
+             </div>
+           </div>
+         </form>
+ 
+       </div><br>
+       <div class="container">
+         <button class="btn btn-warning" (click)="searchBuses()" data-bs-toggle="modal"
+           data-bs-target="#exampleModal"><b>Search</b></button><br>
+       </div>
+    
+ 
+     </div>
+   </div>
+   <button *ngIf="isLoggedIn" type="button" class="btn btn2" style="left: 95%;" routerLink="/issueform">
+ 
+     <img src="/assets/Wikibooks-help-icon.svg.png" style="height: 50px;width: 50px;">
+ 
+   </button>
+   <br><br><br><br><br>
+ </div>
+
+ <nav class="navbar navbar-expand-lg navbar-dark custom-navbar">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div>
+      <a class="navbar-brand" routerLink="/contactus"><img src="assets/images.png" alt="Bootstrap" width="40" height="40" style=" border-radius:48% ;">&nbsp;contact us</a>
+
+    </div>
+    <div class="mx-auto">
+     <p class="mb-0" style="color: white;">All rights reserved to SRTC</p>
+    </div>
+  </div>
+</nav>
